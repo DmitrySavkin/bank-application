@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <style  th:inline="text">
+        header {
+            background: #000;
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index:10;
+        }
+        nav li {
+            float: left;
+            vertical-align:top;
+            margin: 0 10px;
+            height:40px;
+            line-height:20px;
+        }
+        nav  li:first-of-type {
+            margin-left:0px;
+        }
+        nav ul::after {
+            content: ' ';
+            clear: both;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: 700;
+            font-size:18px;
+            color: #FFF;
+        }
+        .container {
+            width:100%;
+            max-width:1200px;
+            margin:0 auto;
+        }
+
+        .popup {
+            width:60%;
+            max-width:900px;
+            border:1px lightgray solid;
+            border-radius:7px;
+            padding: 30px 10%;
+            position:absolute;
+            top:50%;
+            left:50%;
+            -ms-transform: translate(-50%, 50%);
+            transform: translate(-50%, 0%);
+            margin:0 auto;
+        }
+
+        #new-credit-popup, #new-account-popup {
+           display:none;
+        }
+
+        input {
+            width: 100%;
+            height: 1.5em;
+        }
+        select {
+            height: 2em;
+            display: inline-block;
+            margin-left: 3%;
+        }
+        button {
+            height:3.5em;
+        }
+        .customers {
+            border-radius: 7px;
+            position:relative;
+            margin-block-start: 19%;
+            padding: 5% 2%;
+        }
+        .customers, .popup{
+            background: hsla(0,0%, 100%,.9);
+        }
+        .info {
+            display: grid;
+        }
+        .name {
+            grid-column-start:1;
+            grid-column-end:6;
+        }
+
+        .email {
+            grid-column-start:7;
+            grid-column-end:9;
+        }
+        .buttons {
+            grid-column-start:10;
+            grid-column-end:12;
+        }
+        a {
+            color:gray;
+        }
+        input.duration-input {
+              width: 30%;
+        }
+        input[type="checkbox"] {
+            width: 10%;
+            line-height: 6px;
+            /* display: inline-block; */
+            height: 14px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".no-duration").on('change', function(){
+                if (this.checked) {
+                    $(".duration-block").css('display', 'none');
+                } else {
+                    $(".duration-block").css('display', 'block');
+                }
+            });
+        });
+    </script>
+</head>
+<body th:style="'background:url('+ @{/images/bg.jpg} +');'">
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="">Main</a></li>
+                <li><a href="/products">Bank Product</a></li>
+                <li><a href="/customers">Clients</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <div class="customers">
+        <a href="#" onclick='$("#new-account-popup").show(); $("#new-credit-popup").hide()'>Add new bank account</a>
+        <a href="#" onclick='$("#new-credit-popup").show(); $("#new-account-popup").hide()'>Add new bank credit</a>
+        <div class="customers-info">
+            Bank Products
+            <div class="product-list" th:each="product : ${products}" >
+                <div class="product">
+                    <div class="info">
+                        <div class="name" th:text="${product.title}">title</div>
+                        <div class="name" th:text="${product.getProductType()}">type</div>
+                        <div class="name" th:text="${product.getInformationAboutProduct()}">description</div>
+                        <div class="buttons"><a href="#">View details</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="popup" id="new-account-popup">
+            <form  th:object="${account}" th:action="@{/products/add-new-account}" method="post">
+                <div>
+                    <p>No duration <input type="checkbox" value="no-duration" class="no-duration"/></p>
+                    <p class="duration-block"><input name="minimalTerm" class="duration-input" type="number"><select name="duration" th:field="*{duration}">
+                        <option value="month">months</option>
+                        <option value="years">years</option>
+                    </select></p>
+                    <p><input name="title" type="text"  th:field="*{title}" placeholder="title"></p>
+                    <p><input name="description" type="text"  th:field="*{description}" placeholder="Description"></p>
+                    <button>New account</button>
+                </div>
+            </form>
+        </div>
+        <div class="popup" id="new-credit-popup">
+            <form  th:object="${credit}" th:action="@{/products/add-new-credit}" method="post">
+                <div>
+                    <p><input name="failTerm" class="duration-input" type="number"><select name="duration" th:field="*{duration}">
+                        <option value="month">months</option>
+                        <option value="years">years</option>
+                    </select></p>
+                    <p><input name="rate" type="number" th:field="*{rate}"></p>
+                    <p><input name="title" type="text"  th:field="*{title}" placeholder="title"></p>
+                    <p><input name="description" type="text"  th:field="*{description}" placeholder="Description"></p>
+                    <button>New credit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

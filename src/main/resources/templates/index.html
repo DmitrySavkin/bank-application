@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <style  th:inline="text">
+        header {
+            background: #000;
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index:10;
+        }
+        nav li {
+            float: left;
+            vertical-align:top;
+            margin: 0 10px;
+            height:40px;
+            line-height:20px;
+        }
+        nav  li:first-of-type {
+            margin-left:0px;
+        }
+        nav ul::after {
+            content: ' ';
+            clear: both;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: 700;
+            font-size:18px;
+            color: #FFF;
+        }
+        .container {
+            width:100%;
+            max-width:1200px;
+            margin:0 auto;
+        }
+
+        .popup {
+            width:60%;
+            max-width:900px;
+            border:1px lightgray solid;
+            border-radius:7px;
+            padding: 30px 10%;
+            position:absolute;
+            top:50%;
+            left:50%;
+            -ms-transform: translate(-50%, 50%);
+            transform: translate(-50%, 0%);
+            margin:0 auto;
+        }
+
+        #new-customer-popup{
+           display:none;
+        }
+
+        input {
+            width: 100%;
+            height: 1.5em;
+        }
+        button {
+            height:3.5em;
+        }
+        .customers {
+            border-radius: 7px;
+            position:relative;
+            margin-block-start: 19%;
+            padding: 5% 2%;
+        }
+        .customers, #new-customer-popup{
+            background: hsla(0,0%, 100%,.9);
+        }
+        .info {
+            display: grid;
+        }
+        .name {
+            grid-column-start:1;
+            grid-column-end:6;
+        }
+
+        .email {
+            grid-column-start:7;
+            grid-column-end:9;
+        }
+        .buttons {
+            grid-column-start:10;
+            grid-column-end:12;
+        }
+        a {
+            color:gray;
+        }
+        input#find-client-passnumber-field {
+            width:10%;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#find-client-passnumber-field").on('change keydown paste input',function() {
+            let id = $("#find-client-passnumber-field").val();
+            let path  = '/customers/';
+            path = '/customers/find-customer/' + id;
+            $.ajax({
+                method: 'GET',
+                url: path
+            }).done(function(responseJson) {
+                console.log(responseJson);
+
+            });
+        });
+    });
+    </script>
+</head>
+<body th:style="'background:url('+ @{/images/bg.jpg} +');'">
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="">Main</a></li>
+                <li><a href="/products">Bank Product</a></li>
+                <li><a href="/customers">Clients</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <div class="customers">
+        <a href="#" onclick='$("#new-customer-popup").show()'>Add new customer</a>
+        <div class="customers-info">
+            Customers
+            <div class="customers-list" th:fragment="customer-fragment"  th:each="customer : ${customers}">
+                <div class="customer">
+                    <div class="info">
+                        <div class="name" th:text="${customer.firstname}">name</div>
+                        <div class="email" th:text="${customer.email}">han@info.de</div>
+                        <div class="email" th:text="${customer.passNumber}">passnumber</div>
+                        <div class="buttons"><a th:href="@{/customers/customer(id=${customer.id})}">View details</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup" id="new-customer-popup">
+            <form id="new-customer-form" th:object="${customer}" th:action="@{/customers/add-new-customer}" method="post">
+                <div>
+                    <p><input name="firstname" type="text" th:field="*{firstname}" placeholder="Firstname"></p>
+                    <p><input name="lastname" type="text"  th:field="*{lastname}" placeholder="Lastname"></p>
+                    <p><input name="lastname" type="text"  th:field="*{passNumber}" placeholder="Passport number"></p>
+                    <p><input name="email" type="email"  th:field="*{email}" placeholder="E-Mail"></p>
+                    <button>New customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
