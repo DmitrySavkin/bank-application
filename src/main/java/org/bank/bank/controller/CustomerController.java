@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/customers")
+@RequestMapping(value = {"/customers","/"})
 @Slf4j
 public class CustomerController {
 
@@ -39,7 +39,7 @@ public class CustomerController {
         model.addAttribute("customer", new Customer());
 
         // new Customer().getClass().getName()
-        return "index";
+        return "customer";
     }
 
     @PostMapping("/add-new-customer")
@@ -53,7 +53,7 @@ public class CustomerController {
     public String customers(Model model) {
 
             // new Customer().getClass().getName()
-            return "index";
+            return "customer";
     }
 
    @GetMapping("/customer")
@@ -70,7 +70,7 @@ public class CustomerController {
     public String findCustomerByPassnumber(@PathVariable @Nullable  String passnumber, Model model) {
 
         log.info("Passnumber " + passnumber);
-        return "index :: customer-fragment";
+        return "customer :: customer-fragment";
     }
 
 
