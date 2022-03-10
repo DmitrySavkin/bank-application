@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.5/datatables.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script defer>
+        $(document).ready(function() {
+            $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/api/v1/customer-datatable/",
+                "type": "POST",
+                "dataType": "json",
+                "contentType": "application/json",
+                "data": function (d) {
+                    console.log(JSON.stringify(d))
+                    return JSON.stringify(d);
+                }
+            },
+            "columns": [
+                {"data": "firstname", "width": "25%"},
+                {"data": "lastname","width": "25%"},
+                {"data": "passNumber", "width": "20%"},
+                {"data": "email", "width": "20%"},
+                {"data": "id", "width":"10%", "render" : function(data,type,row, meta) {
+                                if (type === "display") {
+                                    let url = "/customers/customer?id=" + data
+                                    data = '<a href="' + url+ '">View details</a>';
+                                }
+                                return data;
+                           }
+                }
+            ]
+        });
+
+    });
+    </script>
+</head>
+<body th:style="'background:url('+ @{/images/bg.jpg} +');'">
+<div th:replace="fragments/components :: header"></div>
+<div class="container">
+    <div class="customers">
+        Error
+    </div>
+
+</div>
+</body>
+</html>
