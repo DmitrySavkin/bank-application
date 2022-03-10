@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import org.bank.bank.models.dtio.ProductDTO;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,5 +37,9 @@ public abstract class Product {
 
     public void addCustomerProduct(CustomerProduct cp) {
         customerProduct.add(cp);
+    }
+
+    public ProductDTO toProductDTO() {
+        return new ProductDTO(id, title, description);
     }
 }

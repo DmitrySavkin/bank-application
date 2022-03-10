@@ -1,0 +1,95 @@
+   header {
+    background: #000;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:10;
+}
+nav li {
+    float: left;
+    vertical-align:top;
+    margin: 0 10px;
+    height:40px;
+    line-height:20px;
+}
+nav  li:first-of-type {
+    margin-left:0px;
+}
+nav ul::after {
+    content: ' ';
+    clear: both;
+}
+nav a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size:18px;
+    color: #FFF;
+}
+.container {
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.popup {
+    width:60%;
+    max-width:900px;
+    border:1px lightgray solid;
+    border-radius:7px;
+    padding: 30px 10%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -ms-transform: translate(-50%, 50%);
+    transform: translate(-50%, 0%);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+
+    margin:0 auto;
+}
+
+#new-customer-popup{
+   display:none;
+}
+
+input {
+    width: 100%;
+    height: 1.5em;
+}
+button {
+    height:3.5em;
+}
+.customers {
+    border-radius: 7px;
+    position:relative;
+    margin-block-start: 19%;
+    padding: 5% 2%;
+}
+.customers, #new-customer-popup, .popup{
+        background: antiquewhite;
+}
+.info {
+    display: grid;
+}
+.name {
+    grid-column-start:1;
+    grid-column-end:6;
+}
+
+.email {
+    grid-column-start:7;
+    grid-column-end:9;
+}
+.buttons {
+    grid-column-start:10;
+    grid-column-end:12;
+}
+a {
+    color:gray;
+}
+input#find-client-passnumber-field {
+    width:10%;
+}
+ #new-credit-popup, #new-account-popup {
+           display:none;
+ }

@@ -60,9 +60,9 @@ public class CustomerController {
    public String getCustomerDetail(@RequestParam long id, Model model) {
         log.info("id "  + id);
         log.info("Customer " + customerService.getCustomerDetails(id));
-     //  model.addAttribute("customer", customerService.getCustomerDetails(id));
-     //  model.addAttribute("availableProducts", bankProductService.getAllProducts());
-    //   model.addAttribute("customerProduct", new CustomerProduct(customerService.getCustomerDetails(id)));
+        model.addAttribute("customer", customerService.getCustomerDetails(id));
+        model.addAttribute("availableProducts", bankProductService.getAllProducts());
+        model.addAttribute("customerProduct", new CustomerProduct(customerService.getCustomerDetails(id)));
        return "customer-profil";
    }
 

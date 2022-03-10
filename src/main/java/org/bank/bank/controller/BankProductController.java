@@ -8,8 +8,13 @@ import org.bank.bank.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.nio.file.Paths;
 
 @Controller
 @Slf4j
@@ -53,4 +58,6 @@ public class BankProductController {
         model.addAttribute("customer", customerService.getCustomerDetails(customerProduct.getCustomer().getId()));
         return "redirect:/customers/customer?id=" + customerProduct.getCustomer().getId() ;
     }
+
+
 }

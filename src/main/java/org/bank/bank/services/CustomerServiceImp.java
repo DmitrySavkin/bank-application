@@ -45,7 +45,7 @@ public class CustomerServiceImp implements CustomerService {
 
     public PageArray getCustomersArray(PagingRequest pagingRequest) {
 
-        pagingRequest.setColumns(Stream.of("firstname", "lastname", "passNumber", "email")
+        pagingRequest.setColumns(Stream.of("id","firstname", "lastname", "passNumber", "email")
                 .map(Column::new)
                 .collect(Collectors.toList()));
 
