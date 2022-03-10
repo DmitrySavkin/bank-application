@@ -5,6 +5,9 @@ import org.bank.bank.models.Customer;
 import org.bank.bank.models.CustomerProduct;
 import org.bank.bank.models.Product;
 import org.bank.bank.models.dtio.CustomerProductDTO;
+import org.bank.bank.models.paging.Page;
+import org.bank.bank.models.paging.PageArray;
+import org.bank.bank.models.paging.PagingRequest;
 import org.bank.bank.services.BankProductService;
 import org.bank.bank.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,7 @@ public class CustomerController {
     @GetMapping
     public String hello(Model model) {
         model.addAttribute("customer", new Customer());
-        model.addAttribute("customers", customerService.getAllCustomers());
+
         // new Customer().getClass().getName()
         return "index";
     }
@@ -48,8 +51,7 @@ public class CustomerController {
 
     @GetMapping("/find-customer/")
     public String customers(Model model) {
-            model.addAttribute("customer", new Customer());
-            model.addAttribute("customers", customerService.getAllCustomers());
+
             // new Customer().getClass().getName()
             return "index";
     }
@@ -58,23 +60,18 @@ public class CustomerController {
    public String getCustomerDetail(@RequestParam long id, Model model) {
         log.info("id "  + id);
         log.info("Customer " + customerService.getCustomerDetails(id));
-       model.addAttribute("customer", customerService.getCustomerDetails(id));
-       model.addAttribute("availableProducts", bankProductService.getAllProducts());
-       model.addAttribute("customerProduct", new CustomerProduct(customerService.getCustomerDetails(id)));
+     //  model.addAttribute("customer", customerService.getCustomerDetails(id));
+     //  model.addAttribute("availableProducts", bankProductService.getAllProducts());
+    //   model.addAttribute("customerProduct", new CustomerProduct(customerService.getCustomerDetails(id)));
        return "customer-profil";
    }
 
     @GetMapping("/find-customer/{passnumber}")
     public String findCustomerByPassnumber(@PathVariable @Nullable  String passnumber, Model model) {
-        model.addAttribute("customer", new Customer());
-        if (Objects.isNull(passnumber)) {
-            model.addAttribute("customers", customerService.getAllCustomers());
-        } else {
-            log.info("Customers " + customerService.getCustomersByPassNumber(passnumber));
-            model.addAttribute("customers", customerService.getCustomersByPassNumber(passnumber));
-        }
+
         log.info("Passnumber " + passnumber);
         return "index :: customer-fragment";
     }
+
 
 }

@@ -1,9 +1,12 @@
 package org.bank.bank.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.bank.bank.models.dtio.CustomerDTO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "customers")
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +34,16 @@ public class Customer {
             @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false, updatable = false)})
 
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CustomerProduct> customerProduct = new ArrayList<>();
 
     public void addCustomerProduct(CustomerProduct cp) {
         customerProduct.add(cp);
+    }
+
+    public CustomerDTO toCustomerDto() {
+        return new CustomerDTO(id, firstname, lastname, email, passNumber);
     }
 
 

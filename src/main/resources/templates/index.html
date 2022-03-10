@@ -8,6 +8,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
+
+    <link th:rel="stylesheet" th:href="@{assets/datatable/datatables.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <style  th:inline="text">
         header {
             background: #000;
@@ -100,21 +103,32 @@
             width:10%;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#find-client-passnumber-field").on('change keydown paste input',function() {
-            let id = $("#find-client-passnumber-field").val();
-            let path  = '/customers/';
-            path = '/customers/find-customer/' + id;
-            $.ajax({
-                method: 'GET',
-                url: path
-            }).done(function(responseJson) {
-                console.log(responseJson);
-
-            });
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.5/datatables.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script defer>
+        $(document).ready(function() {
+            $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/api/v1/customer-datatable/",
+                "type": "POST",
+                "dataType": "json",
+                "contentType": "application/json",
+                "data": function (d) {
+                    console.log(JSON.stringify(d))
+                    return JSON.stringify(d);
+                }
+            },
+            "columns": [
+                {"data": "firstname", "width": "20%"},
+                {"data": "lastname","width": "20%"},
+                {"data": "passNumber", "width": "20%"},
+                {"data": "email", "width": "20%"}
+            ]
         });
+
     });
     </script>
 </head>
@@ -135,16 +149,29 @@
     <div class="customers">
         <a href="#" onclick='$("#new-customer-popup").show()'>Add new customer</a>
         <div class="customers-info">
+
             Customers
-            <div class="customers-list" th:fragment="customer-fragment"  th:each="customer : ${customers}">
-                <div class="customer">
+            <table id="example" class="table table-bordered table-responsive" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th style="width:20%">Firstname</th>
+                        <th style="width:20%">Lastname</th>
+                        <th style="width:20%">Passnumber</th>
+                        <th style="width:20%">Email</th>
+                    </tr>
+                </thead>
+
+            </table>
+
+            <!--<div class="customers-list" th:fragment="customer-fragment"  th:each="customer : ${customers}">
+                &lt;!&ndash;<div class="customer">
                     <div class="info">
                         <div class="name" th:text="${customer.firstname}">name</div>
                         <div class="email" th:text="${customer.email}">han@info.de</div>
                         <div class="email" th:text="${customer.passNumber}">passnumber</div>
                         <div class="buttons"><a th:href="@{/customers/customer(id=${customer.id})}">View details</a> </div>
-                    </div>
-                </div>
+                    </div>&ndash;&gt;
+              </div> -->
             </div>
         </div>
         <div class="popup" id="new-customer-popup">

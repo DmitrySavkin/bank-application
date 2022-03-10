@@ -1,7 +1,10 @@
 package org.bank.bank.services;
 
 import org.bank.bank.models.Customer;
-import org.springframework.stereotype.Service;
+import org.bank.bank.models.dtio.CustomerDTO;
+import org.bank.bank.models.paging.Page;
+import org.bank.bank.models.paging.PageArray;
+import org.bank.bank.models.paging.PagingRequest;
 
 import java.util.List;
 
@@ -12,5 +15,8 @@ public interface CustomerService {
         Customer getCustomerDetails(long id);
         Customer addCustomer(Customer customer);
         List<Customer> getCustomersByPassNumber(String passNumber);
+        Page<CustomerDTO> getPage(List<CustomerDTO> customers, PagingRequest pagingRequest);
+        Page<CustomerDTO> getCustomers(PagingRequest pagingRequest);
+        PageArray getCustomersArray(PagingRequest pagingRequest);
 
 }
