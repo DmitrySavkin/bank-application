@@ -33,19 +33,17 @@ nav a {
 }
 
 .popup {
-    width:60%;
-    max-width:900px;
-    border:1px lightgray solid;
-    border-radius:7px;
-    padding: 30px 10%;
-    position:absolute;
-    top:50%;
-    left:50%;
-    -ms-transform: translate(-50%, 50%);
-    transform: translate(-50%, 0%);
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-
-    margin:0 auto;
+   width:60%;
+   max-width:1200px;
+   border:1px lightgray solid;
+   border-radius:7px;
+   padding: 30px 10%;
+   position:absolute;
+   top:50%;
+   left:50%;
+   -ms-transform: translate(-50%, 50%);
+   transform: translate(-50%, 0%);
+   margin:0 auto;
 }
 
 #new-customer-popup{
@@ -87,9 +85,20 @@ button {
 a {
     color:gray;
 }
-input#find-client-passnumber-field {
-    width:10%;
+input#find-client-passnumber-field, input.duration-input {
+    width:30%;
+    margin-right:1%;
+
 }
- #new-credit-popup, #new-account-popup {
-           display:none;
+
+input[type=checkbox] {
+    width: 20%;
+    padding: 0 auto;
+    position: relative;
+    top: 6px;
+
+}
+
+#new-credit-popup, #new-account-popup, #new-product-client-popup {
+   display:none;
  }

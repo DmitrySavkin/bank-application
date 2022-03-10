@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 @IdClass(CustomerProduct.class)
 public class CustomerProduct implements  Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long number;
     @ManyToOne(fetch = FetchType.LAZY)
     @Id
     private Customer customer;

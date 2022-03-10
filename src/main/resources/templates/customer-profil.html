@@ -9,18 +9,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.5/datatables.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script defer>
+        $(document).ready(function() {
+            $('#example').DataTable({
+            "processing": false,
+            "serverSide": false,
+
+            "columns": [
+               {"data": "title", "width": "20%"},
+                {"data": "description","width": "40%"},
+                {"data": "amount","width": "40%"}
+
+
+            ]
+        });
+
+    });
     </script>
 </head>
 <body th:style="'background:url('+ @{/images/bg.jpg} +');'">
 <div th:replace="fragments/components :: header"></div>
 <div class="container">
     <div class="customers">
-        <a href="#" onclick='$("#new-customer-popup").show()'>Add new customer</a>
         <div class="customers-info">
-            Customers
-
                 <div class="customer">
                     <div class="info" >
                         <div class="name" th:text="${customer.firstname}">name</div>
@@ -30,34 +46,35 @@
                     </div>
                     <div>
                         <h6>Banking products</h6>
-                        <a href="#" onclick='$("#new-product-popup").show();'>Add new product</a>
+                        <a href="#" onclick='$("#new-product-client-popup").show();'>Add new product</a>
                         <div>
                             Current products
-
-                            <div class="product-title">
-                                <p>Title</p>
-                            </div>
-                            <div class="product-information">
-                                <p>Amount</p>
-                            </div>
-                            <div th:each="product : ${customer.customerProduct}">
-                                <div class="product-title">
-                                    <p th:text="${product.product.title}"></p>
-                                </div>
-                                <div class="product-information">
-                                    <p th:text="${product.amount}"></p>
-                                </div>
-                            </div>
+                            <table id="example" class="table table-bordered table-responsive" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th style="width:20%">Number</th>
+                                    <th style="width:40%">Title</th>
+                                    <th style="width:40%">Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="product : ${customer.customerProduct}">
+                                    <tr>
+                                        <td style="width:20%" th:text="${product.number}"></td>
+                                        <td style="width:40%" th:text="${product.product.title}"></td>
+                                        <td style="width:20%" th:text="${product.amount}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div id="new-product-popup">
+                        <div id="new-product-client-popup" class="popup">
                             <form th:object="${customerProduct}" th:action="@{/products/new-product-by-customer}" method="post">
                                 <p><select th:field="*{product}">
                                         <th:block  th:each="prod : ${availableProducts}">
-                                            <option th:value="${prod.id}" th:text="${prod.title}">Account</option>
+                                            <option th:value="${prod.id}" th:text="${prod.getNameAndType()}">Account</option>
                                         </th:block>
                                     </select>
                                 </p>
-                                <p><input type="number" th:field="*{amount}" placeholder="amount"></p>
+                                <p><input type="number" th:field="*{amount}" required placeholder="amount"></p>
                                 <p><input type="hidden" th:field="*{customer}" th:value="${customer}"></p>
                                 <button>Open</button>
                             </form>
