@@ -30,5 +30,9 @@ public class CustomerProduct implements  Serializable{
     }
 
 
+    public  class CustomerProductPK  implements Serializable {
+        long customer;
+        long product;
+    }
 
 }
