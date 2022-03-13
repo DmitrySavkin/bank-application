@@ -8,12 +8,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.5/datatables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $(".no-duration").on('change', function(){
@@ -24,7 +24,7 @@
                 }
             });
 
-             $('#example').DataTable({
+           $('#example1').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -55,12 +55,12 @@
 
         <div class="customers-info">
             Bank Products
-            <table id="example" class="table table-bordered table-responsive" style="width: 100%">
+            <table id="example1" class="table table-bordered">
                 <thead>
-                <tr>
-                    <th style="width:50%">Title</th>
-                    <th style="width:50%">Description</th>
-                </tr>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
                 </thead>
             </table>
         </div>

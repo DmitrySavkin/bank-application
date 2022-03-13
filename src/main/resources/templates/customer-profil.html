@@ -49,12 +49,12 @@
                         <a href="#" onclick='$("#new-product-client-popup").show();'>Add new product</a>
                         <div>
                             Current products
-                            <table id="example" class="table table-bordered table-responsive" style="width: 100%">
+                            <table id="example" class="table table-bordered table-responsive" >
                                 <thead>
                                 <tr>
-                                    <th style="width:20%">Number</th>
-                                    <th style="width:40%">Title</th>
-                                    <th style="width:40%">Amount</th>
+                                    <th>Number</th>
+                                    <th>Title</th>
+                                    <th>Amount</th>
                                 </tr>
                                 </thead>
                                 <tbody th:each="product : ${customer.customerProduct}">

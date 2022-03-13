@@ -28,10 +28,13 @@ nav a {
 }
 .container {
     width:100%;
-    max-width:1200px;
+    max-width:1800px;
     margin:0 auto;
 }
 
+.customers-info {
+    margin-top: 70px;
+}
 .popup {
    width:60%;
    max-width:1200px;
