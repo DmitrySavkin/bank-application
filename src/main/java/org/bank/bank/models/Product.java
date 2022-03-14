@@ -40,7 +40,7 @@ public abstract class Product {
     }
 
     public ProductDTO toProductDTO() {
-        return new ProductDTO(id, title, description);
+        return new ProductDTO(id, title,description, getProductType() );
     }
 
     public String getNameAndType() {

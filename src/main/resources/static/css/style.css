@@ -1,4 +1,10 @@
-   header {
+body {
+    font-family: Arial;
+    font-size: 0.8em;
+    background: #fafcfc !important;
+
+}
+header {
     background: #000;
     position:fixed;
     top:0;
@@ -28,7 +34,7 @@ nav a {
 }
 .container {
     width:100%;
-    max-width:1800px;
+    max-width:1200px;
     margin:0 auto;
 }
 
@@ -55,6 +61,9 @@ nav a {
    margin:0 auto;
 }
 
+.popup h4 {
+
+}
 #new-customer-popup{
    display:none;
 }
@@ -83,7 +92,10 @@ button {
     padding: 5% 2%;
 }
 .customers, #new-customer-popup, .popup{
-        background: antiquewhite;
+           background: #fff;
+           /* border: 1px lightgreen solid; */
+           box-shadow: 2px 1px 1px 5px lightgrey;
+
 }
 .info {
     display: grid;

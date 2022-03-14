@@ -47,7 +47,7 @@ public class BankProductServiceImpl implements  BankProductService {
 
 
     public PageArray getProductArray(PagingRequest pagingRequest) {
-        pagingRequest.setColumns(Stream.of("id","title", "description")
+        pagingRequest.setColumns(Stream.of("id", "title", "description", "type")
                 .map(Column::new)
                 .collect(Collectors.toList()));
 
