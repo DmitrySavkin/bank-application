@@ -81,6 +81,7 @@
             </div>
         </div>
         <div class="popup" id="new-customer-popup">
+            <h4>New customer</h4>
             <form id="new-customer-form" th:object="${customer}" th:action="@{/customers/add-new-customer}" method="post">
                 <div>
                     <p><input name="firstname" type="text" required th:field="*{firstname}" placeholder="Firstname"></p>
