@@ -12,6 +12,9 @@ header {
     right:0;
     z-index:10;
 }
+.logout {
+
+}
 nav li {
     float: left;
     vertical-align:top;

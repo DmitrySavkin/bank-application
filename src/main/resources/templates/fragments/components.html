@@ -12,6 +12,11 @@
                 <li><a href="/products">Bank Product</a></li>
                 <li><a href="/customers">Clients</a></li>
             </ul>
+            <div class="logout">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
         </nav>
     </div>
 </header>
