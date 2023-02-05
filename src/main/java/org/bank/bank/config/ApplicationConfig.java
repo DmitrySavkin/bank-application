@@ -29,8 +29,11 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/", "/h2-console/**").permitAll()
+                .antMatchers("/","api/v1/**","/css/*", "/js/*","/api/*", "/h2-console/*")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -1,55 +1,64 @@
 body {
     font-family: Arial;
     font-size: 0.8em;
-    background: #fafcfc !important;
-
+    font: Helvetica,Arial,sans-serif;
+    background: #f0f0f0  !important;
 }
 header {
-    background: #000;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:10;
+    height: 50px;
+    background-color: red;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%)
 }
-.logout {
+h3 {
+    margin: 40px 0 10px;
+}
 
+.header_inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
-nav li {
-    float: left;
-    vertical-align:top;
+nav a{
+    display: inline-block;
+    vertical-align: top;
     margin: 0 10px;
-    height:40px;
-    line-height:20px;
 }
+
 nav  li:first-of-type {
-    margin-left:0px;
+    margin-left: 0px;
 }
 nav ul::after {
     content: ' ';
     clear: both;
 }
+
 nav a {
     text-decoration: none;
     font-weight: 700;
-    font-size:18px;
+    font-size:14px;
     color: #FFF;
 }
+nav a:hover {
+   color:#FFF;
+}
+
 .container {
     width:100%;
     max-width:1200px;
     margin:0 auto;
 }
 
-.customers-info {
-    margin-top: 70px;
-}
 
 #new-customer-form{
     margin-top:40px;
 
 }
-
+.logout button {
+        background: no-repeat;
+        color: white;
+        border: none;
+}
 .popup {
    width:60%;
    max-width:1200px;
@@ -64,41 +73,74 @@ nav a {
    margin:0 auto;
 }
 
-.popup h4 {
 
+.person_data p span {
+    display:inline-block;
+    margin: 0 1% 0 0;
 }
+
 #new-customer-popup{
    display:none;
 }
 
 input {
     width: 100%;
+     height: 23px;
+     border-radius:8px;
+     box-shadow: rgb(102 102 102) 0px 0px 8px, rgb(102 102 102) 0px 0px 8px;
+     border: 1px solid rgb(102, 102, 102);
+     background-color: rgb(255, 255, 255);
 }
-input, button {
 
-     padding: 2px 10px;
-     border: 1px solid lightblue;
-     background: white;
+.dataTables_length, .dataTables_filter {
+    width:20%;
+}
+.dataTables_length {
+    float:left;
+}
+.dataTables_filter {
+    float:right;
+}
+.dataTables_filter::after {
+    clear: both;
+    content: '';
+}
+
+input, .dataTables_length{
+     outline: none;
+     font-family: Helvetica, Arial, sans-serif;
+     font-weight: normal;
+     font-style: normal;
+     line-height: 1.5;
+     box-sizing: border-box;
+     appearance: textfield;
+     border-radius: 6px;
+     box-shadow: white 0px 0px 0px 100px inset;
+     color: rgb(102, 102, 102);
 }
 
 button {
-     height: 2.5em;
-     /* border-radius: 40px; */
-     padding: 2px 10px;
-     border: 1px solid lightblue;
-     background: white;
+    font: 14px Helvetica,Arial,sans-serif;
+    line-height: 150%;
+    color: white;
+    background: rgba(68,68,68,.6);
+    border-left: 1px solid hsla(0,0%,100%,.4);
+    flex-grow: 5;
+    height: 30px;
+    text-align: center;
+
+
 }
 .customers {
     border-radius: 7px;
-    position:relative;
-    margin-block-start: 19%;
-    padding: 5% 2%;
+    position: relative;
+    margin-block-start: 30px;
+    padding: 2% 2%;
 }
 .customers, #new-customer-popup, .popup{
            background: #fff;
            /* border: 1px lightgreen solid; */
            box-shadow: 2px 1px 1px 5px lightgrey;
-
 }
 .info {
     display: grid;
@@ -122,14 +164,50 @@ a {
 input#find-client-passnumber-field, input.duration-input {
     width:30%;
     margin-right:1%;
-
 }
+
 
 input[type=checkbox] {
     width: 20%;
     padding: 0 auto;
     position: relative;
     top: 6px;
+
+}
+.openproduct {
+    margin-bottom:50px;
+    margin-top:20px;
+        /* font: 14px Helvetica,Arial,sans-serif; */
+        /* line-height: 150%; */
+        color: white;
+        /* background: rgba(68,68,68,.6); */
+        border-left: 1px solid hsla(0,0%,100%,.4);
+        flex-grow: 5;
+        /* height: 30px; */
+        text-align: center;
+        background: white;
+        color: red;
+        border: 1px solid gainsboro;
+        padding: 50px;
+        text-align: center;
+        align-items: center;
+        font-size: 12px;
+        position:relative;
+        margin-right:2px;
+}
+
+.openproduct p {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 5px;
+
+
+}
+.new-products {
+    display:inline-flex;
+}
+.new-products img {
 
 }
 

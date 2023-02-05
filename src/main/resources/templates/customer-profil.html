@@ -8,13 +8,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Buda:wght@300&family=Lateef&family=Manuale:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.5/datatables.min.css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script defer>
@@ -27,8 +28,6 @@
                {"data": "title", "width": "20%"},
                 {"data": "description","width": "40%"},
                 {"data": "amount","width": "40%"}
-
-
             ]
         });
 
@@ -39,20 +38,23 @@
 <div th:replace="fragments/components :: header"></div>
 <div class="container">
     <div class="customers">
+        <div class="person_data">
+            <p><span>Name:</span><span th:text="${customer.firstname}"></span></p>
+            <p><span>Email:</span><span th:text="${customer.email}"></span></p>
+            <p><span>Password:</span><span th:text="${customer.passNumber}"></span></p>
+            <div class="buttons"></div>
+        </div>
+    </div>
+    <div class="customers">
+        <h3>Banking products</h3>
+        <button class="button is-link is-small openproduct"   onclick='$("#new-product-client-popup").show();'>
+            Open Account/Credit
+        </button>
         <div class="customers-info">
-                <div class="customer">
-                    <div class="info" >
-                        <div class="name" th:text="${customer.firstname}">name</div>
-                        <div class="email" th:text="${customer.email}">han@info.de</div>
-                        <div class="email" th:text="${customer.passNumber}">passnumber</div>
-                        <div class="buttons"></div>
-                    </div>
-                    <div>
-                        <h6>Banking products</h6>
-                        <a href="#" onclick='$("#new-product-client-popup").show();'>Add new product</a>
+            <div class="customer">
                         <div>
                             Current products
-                            <table id="example" class="table table-bordered table-responsive" >
+                            <table id="example" class="table table-bordered" >
                                 <thead>
                                 <tr>
                                     <th>Number</th>
@@ -62,9 +64,9 @@
                                 </thead>
                                 <tbody th:each="product : ${customer.customerProduct}">
                                     <tr>
-                                        <td style="width:20%" th:text="${product.number}"></td>
-                                        <td style="width:40%" th:text="${product.product.title}"></td>
-                                        <td style="width:20%" th:text="${product.amount}"></td>
+                                        <td th:text="${product.number}"></td>
+                                        <td th:text="${product.product.title}"></td>
+                                        <td th:text="${product.amount}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -79,14 +81,11 @@
                                 </p>
                                 <p><input type="number" th:field="*{amount}" required placeholder="amount"></p>
                                 <p><input type="hidden" th:field="*{customer}" th:value="${customer}"></p>
-                                <button>Open</button>
+                                <button class="button is-link is-small is-outlined">Open</button>
                             </form>
                         </div>
-                    </div>
                 </div>
-
         </div>
-
     </div>
 </div>
 </body>

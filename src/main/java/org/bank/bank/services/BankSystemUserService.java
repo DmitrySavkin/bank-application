@@ -26,6 +26,7 @@ public class BankSystemUserService implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return repository.findByUsername(s).get();
+        UserDetails details = repository.findByUsername(s).get();
+        return details;
     }
 }

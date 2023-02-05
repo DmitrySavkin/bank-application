@@ -7,17 +7,18 @@
 <body>
 <header th:fragment="header">
     <div class="container">
-        <nav>
-            <ul>
-                <li><a href="/products">Bank Product</a></li>
-                <li><a href="/customers">Clients</a></li>
-            </ul>
+        <div class="header_inner">
+            <nav>
+                    <a href="/products">Bank Product</a>
+                    <a href="/customers">Clients</a>
+                </ul>
+            </nav>
             <div class="logout">
                 <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out"/>
+                    <button>Sign Out</button>
                 </form>
             </div>
-        </nav>
+        </div>
     </div>
 </header>
 </body>
