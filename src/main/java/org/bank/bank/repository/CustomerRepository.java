@@ -10,4 +10,5 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     List<Customer> findByPassNumberContains(String passnumber);
+    Customer findByLastnameAndPassNumber(String lastname, String passnumber);
 }

@@ -19,4 +19,5 @@ public interface CustomerService {
         Page<CustomerDTO> getCustomers(PagingRequest pagingRequest);
         PageArray getCustomersArray(PagingRequest pagingRequest);
 
+    Customer getCustomerByLastnameAndPassword(Customer customer);
 }

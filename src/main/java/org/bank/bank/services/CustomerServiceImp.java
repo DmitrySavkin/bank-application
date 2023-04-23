@@ -60,6 +60,11 @@ public class CustomerServiceImp implements CustomerService {
         return pageArray;
     }
 
+    @Override
+    public Customer getCustomerByLastnameAndPassword(Customer customer) {
+            return customerRepository.findByLastnameAndPassNumber(customer.getLastname(), customer.getPassNumber());
+    }
+
     private List<String> toStringList(CustomerDTO customer)  {
        return Arrays.asList( customer.getFirstname(), customer.getLastname(),
                 customer.getPassNumber(), customer.getEmail());

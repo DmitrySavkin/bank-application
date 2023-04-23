@@ -32,7 +32,7 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/","api/v1/**","/css/*", "/js/*","/api/*", "/h2-console/*")
+                .antMatchers("/","api/v1/**","/css/*", "/js/*","/api/*", "/console/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -42,6 +42,9 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
     }
 

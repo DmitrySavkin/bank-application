@@ -37,8 +37,6 @@ public class CustomerController {
     @GetMapping
     public String hello(Model model) {
         model.addAttribute("customer", new Customer());
-
-        // new Customer().getClass().getName()
         return "customer";
     }
 
@@ -51,8 +49,6 @@ public class CustomerController {
 
     @GetMapping("/find-customer/")
     public String customers(Model model) {
-
-            // new Customer().getClass().getName()
             return "customer";
     }
 
